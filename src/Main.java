@@ -90,14 +90,19 @@ public class Main{
         // // print all the values that are greater than 5 and print it using log
 //        Mono<Integer> intMono = Mono.just(1);
 //        System.out.println("A");
-//        ReactiveStreams.intNumber().map(e-> {
-//                    if(e==4){
-//                        return new Exception("");
-//                    }
-//                    else return e;
+        Flux.just(1,2,3,4,5,6,7,8).flatMap(e-> {
+                    if(e==4){
+                        //return Mono.
+                        return Mono.error(new Throwable());
+                    }
+                    else return Mono.just(e);
+                })
+//                .onErrorResume(throwable -> Mono.just(0))
+                // .onErrorReturn(0)
+//                .onErrorContinue((throwable, o) -> {
+//                   System.err.println("error");
 //                })
-//                .onErrorReturn("Error")
-//                        .subscribe(System.out::println);
+                        .subscribe(System.out::println);
 //        Flux.just(1,2,0,3,4)
 //                .map(e->25/e) // will produce ArithmeticException
 //                .onErrorContinue((err,obj)-> System.out.println(err.toString()))
@@ -106,10 +111,25 @@ public class Main{
 //                .map(e->25/e) // will produce ArithmeticException
 //                .onErrorReturn(-1)
 //                .subscribe(System.out::println);
-        Flux.just(1,2,0,3,4)
-                .map(e->25/e) // will produce ArithmeticException
-                .onErrorResume(e-> System.out::println)
-                .subscribe(System.out::println);
+//        Flux.just(1,2,0,3,4)
+//                .map(e->25/e) // will produce ArithmeticException
+////                .onErrorResume(e-> System.out::println)
+//                .onErrorResume(throwable -> {
+//                    return Mono.just(1);
+//                })
+//                .doOnNext()
+//                .doOnError(throwable -> {
+//                    System.out.println("1");
+//                })
+//                .subscribe(System.out::println);
+//        onErrorReturn() return a value not Flux or Mono and stop executing there.
+//        onErrorResume() return a Mono/Flux and stop executing there.
+//        onErrorContinue() continues after the error and takes two arguments err,obj returns nothing
+//        doOnError() stops executing there
+//        Flux.just(1, 2, 0, 3, 4)
+//                .map(e -> 25 / e)
+//                .onErrorContinue((err,obj)-> System.out.print(err.toString()))
+//                .subscribe(System.out::println);
         System.in.read();
     }
 }

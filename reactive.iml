@@ -9,6 +9,5 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="io.projectreactor.reactor.core" level="project" />
     <orderEntry type="library" name="io.projectreactor.reactor.test" level="project" />
-    <orderEntry type="library" name="projectlombok.test.maven.lombok" level="project" />
   </component>
 </module>
